@@ -1,4 +1,4 @@
-from wtforms import StringField, IntegerField
+from wtforms import StringField, IntegerField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, Regexp, length, ValidationError
 
 from app.libs.enums import ClientTypeEnum
@@ -48,3 +48,14 @@ class BookSearchForm(Form):
 
 class TokenForm(Form):
     token = StringField(validators=[DataRequired()])
+
+
+# todolist 创建的表单
+class ThingForm(Form):
+    content = StringField(validators=[DataRequired()])
+
+
+# todolist 更新的表单
+class ThingUpdateForm(Form):
+    content = StringField()
+    complete_status = StringField(validators=[Length(min=2, max=2)])

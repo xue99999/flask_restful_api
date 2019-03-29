@@ -25,7 +25,11 @@ def get_token():
     token = generate_auth_token(identity['uid'], form.type.data, identity['scope'], expiration)
 
     t = {
-        'token': token.decode('ascii')
+        'error_code': 0,
+        'msg': 'ok',
+        'data': {
+            'token': token.decode('ascii')
+        }
     }
     return jsonify(t), 201
 

@@ -18,7 +18,7 @@ class Scope:
 
 
 class AdminScope(Scope):
-    allow_module = ['v1.user', 'v1.book', 'v1.gift', 'v1.token']
+    allow_module = ['v1.user', 'v1.book', 'v1.gift', 'v1.token', 'v1.thing']
 
     def __init__(self):
         pass
