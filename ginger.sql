@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2019-04-02 09:42:40
+Date: 2019-04-02 21:46:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -35,11 +35,13 @@ CREATE TABLE `book` (
   `image` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `isbn` (`isbn`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of book
 -- ----------------------------
+INSERT INTO `book` VALUES (null, '1', '1', '123456789', 'xuejun', '精装', 'xuejun', '12.00', '386', '1525874561', '99998888', '这本书的简介', 'https://gss0.bdstatic.com/-4o3dSag_xI4khGkpoWK1HF6');
+INSERT INTO `book` VALUES (null, '1', '3', '哈哈', 'xuejun123', '精装', 'xuejun123', '22.00', '888', '1525874561', '99996666', '这本书的简介', 'https://gss0.bdstatic.com/-4o3dSag_xI4khGkpoWK1HF6');
 
 -- ----------------------------
 -- Table structure for gift
@@ -55,62 +57,39 @@ CREATE TABLE `gift` (
   PRIMARY KEY (`id`),
   KEY `uid` (`uid`),
   CONSTRAINT `gift_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of gift
 -- ----------------------------
+INSERT INTO `gift` VALUES ('1552394108', '1', '4', '5', '99996666', '0');
+INSERT INTO `gift` VALUES ('1552394120', '1', '5', '5', '99998888', '0');
 
 -- ----------------------------
--- Table structure for thing
+-- Table structure for todo_list
 -- ----------------------------
-DROP TABLE IF EXISTS `thing`;
-CREATE TABLE `thing` (
+DROP TABLE IF EXISTS `todo_list`;
+CREATE TABLE `todo_list` (
   `create_time` int(11) DEFAULT NULL,
   `status` smallint(6) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) DEFAULT NULL,
-  `content` varchar(15) NOT NULL,
-  `complete_status` varchar(2) DEFAULT NULL,
-  `update_time` int(11) NOT NULL,
+  `text` varchar(200) NOT NULL,
+  `textStatus` smallint(6) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `uid` (`uid`),
-  CONSTRAINT `thing_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `todo_list_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
--- Records of thing
+-- Records of todo_list
 -- ----------------------------
-INSERT INTO `thing` VALUES ('1553572542', '1', '1', '1', '111，我是第一条数据', '02', '1554100225');
-INSERT INTO `thing` VALUES ('1553572573', '1', '2', '1', '222，我是第二条数据', '01', '1553852079');
-INSERT INTO `thing` VALUES ('1553572583', '1', '3', '1', '333，我是第三条数据', '02', '1553853378');
-INSERT INTO `thing` VALUES ('1553746046', '1', '4', '1', '中午12.30去吃饭', '02', '1554100222');
-INSERT INTO `thing` VALUES ('1553746275', '0', '5', '1', '还不吃饭啊，饿死我了', '02', '1553828827');
-INSERT INTO `thing` VALUES ('1553758287', '0', '6', '1', '新的一条数据啊，哈哈哈', '01', '1553828829');
-INSERT INTO `thing` VALUES ('1553764898', '0', '7', '1', '123123123', '01', '1553828757');
-INSERT INTO `thing` VALUES ('1553824185', '0', '8', '1', '329新增哈哈哈', '02', '1553824202');
-INSERT INTO `thing` VALUES ('1553824474', '1', '9', '2', '我是2账号', '02', '1553824477');
-INSERT INTO `thing` VALUES ('1553828203', '0', '10', '1', '新佳佳哈哈哈哈', '02', '1553828674');
-INSERT INTO `thing` VALUES ('1553828212', '0', '11', '1', '我就是要新加数据哈哈哈', '02', '1553828679');
-INSERT INTO `thing` VALUES ('1553829298', '0', '12', '1', '新的哈哈哈哈', '01', '1553852702');
-INSERT INTO `thing` VALUES ('1553845653', '1', '13', '1', '新增，哈哈哈哈', '01', '1554100224');
-INSERT INTO `thing` VALUES ('1553845783', '0', '14', '1', '新加的一套数据', '02', '1553845801');
-INSERT INTO `thing` VALUES ('1553846432', '1', '15', '1', '新增的一条数据', '02', '1553852706');
-INSERT INTO `thing` VALUES ('1553846537', '0', '16', '1', '新家的数据刷单但是', '01', '1553847457');
-INSERT INTO `thing` VALUES ('1553846591', '0', '17', '1', 'xin jia ha ha ', '01', '1553846591');
-INSERT INTO `thing` VALUES ('1553850268', '1', '18', '1', '新家的一条秋裤，哈哈哈', '02', '1553851295');
-INSERT INTO `thing` VALUES ('1553850859', '0', '19', '1', '注意呀', '02', '1553850940');
-INSERT INTO `thing` VALUES ('1553852111', '0', '20', '1', '新家的数据哈哈', '01', '1553852726');
-INSERT INTO `thing` VALUES ('1553852715', '0', '21', '1', 'cesc ', '02', '1553852717');
-INSERT INTO `thing` VALUES ('1553852736', '1', '22', '1', 'cecsce', '02', '1554100245');
-INSERT INTO `thing` VALUES ('1554089801', '1', '23', '3', '我是新任务哈哈哈', '01', '1554090547');
-INSERT INTO `thing` VALUES ('1554089836', '1', '24', '3', '新任务哈哈哈哈', '01', '1554103280');
-INSERT INTO `thing` VALUES ('1554089845', '1', '25', '3', '就是新的任务，耶耶耶', '01', '1554103519');
-INSERT INTO `thing` VALUES ('1554090054', '1', '26', '3', '就是新任务哈哈哈', '02', '1554102805');
-INSERT INTO `thing` VALUES ('1554100119', '1', '27', '3', '新增哈哈', '02', '1554102543');
-INSERT INTO `thing` VALUES ('1554100236', '1', '28', '1', '中央音乐学院', '02', '1554100246');
-INSERT INTO `thing` VALUES ('1554100287', '1', '29', '1', '哈哈哈哈', '01', '1554100287');
-INSERT INTO `thing` VALUES ('1554103529', '1', '30', '3', '嘻嘻哈哈灌灌灌灌', '02', '1554103532');
+INSERT INTO `todo_list` VALUES (null, '1', '1', '5', '213', '2');
+INSERT INTO `todo_list` VALUES (null, '1', '2', '5', '213123', '2');
+INSERT INTO `todo_list` VALUES (null, '1', '3', '5', '123123', '2');
+INSERT INTO `todo_list` VALUES (null, '1', '4', '5', '我是新加的一条数据,哈哈哈哈', '2');
+INSERT INTO `todo_list` VALUES (null, '1', '5', '5', '2222', '2');
+INSERT INTO `todo_list` VALUES (null, '1', '6', '5', '66666', '2');
 
 -- ----------------------------
 -- Table structure for user
@@ -127,11 +106,14 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `nickname` (`nickname`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1553567059', '1', '1', 'xue@qq.com', 'xuejun', '1', 'pbkdf2:sha256:50000$9BHtjeDo$bed775d028ff8a2f4d2e9f2d6c573b351c0376b69a9eb35239ef4e6d526ccf1a');
-INSERT INTO `user` VALUES ('1553585228', '1', '2', 'haha@qq.com', 'haha', '1', 'pbkdf2:sha256:50000$CsF4DIVm$a8fa0594c2e14ff1f652e65c74599e20fa7a5f9138bd51f917126e028b565b13');
-INSERT INTO `user` VALUES ('1554088428', '1', '3', '123@qq.com', '123', '1', 'pbkdf2:sha256:50000$HBatolEo$ba297a5d32d250e113180e7b973b2b88ee47e3a24adaf2202305a0f5e0f4b7ee');
+INSERT INTO `user` VALUES ('1551601820', '1', '5', '1@qq.com', 'xuejun111', '1', 'pbkdf2:sha256:50000$Y8s4diwZ$5c9a4ccff55f1720c81f6cd075feff9c8694180bb5c5407fe7ff6fa0e375935d');
+INSERT INTO `user` VALUES ('1551601837', '1', '6', '2@qq.com', 'xuejun222', '1', 'pbkdf2:sha256:50000$qZuo2tWV$a023a6958a5a235552ecf8a4364f2e267929647fcf9abd19e63ca9e70e1e12c7');
+INSERT INTO `user` VALUES ('1551601848', '1', '7', '3@qq.com', 'xuejun333', '1', 'pbkdf2:sha256:50000$jCfSobu4$f2c8c27f6c2a330cfe198392e5d2c90970296eb1224b1d82165ad01df063d844');
+INSERT INTO `user` VALUES ('1552140079', '1', '8', '999@qq.com', 'Super', '2', 'pbkdf2:sha256:50000$cQdImgkS$1b4a3339792c3ee54a97fc2cdf3ed358da97d0726ce1f80e940ef7434e782c01');
+INSERT INTO `user` VALUES ('1552140171', '1', '9', 'admin@qq.com', 'admin', '2', 'pbkdf2:sha256:50000$29MgjA7V$003b185ae40a6b2d4870cdb46272c2194ab6a80317c934e45ed1471f7d44b151');
+INSERT INTO `user` VALUES ('1552307451', '1', '10', 'admin123@qq.com', 'admin123', '2', 'pbkdf2:sha256:50000$JaedTv4q$66bf621daef4bcf2a65ef4a8ecb2e712749a1bca6cd492cbc0f41ba320947311');
