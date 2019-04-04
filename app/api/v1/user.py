@@ -41,7 +41,12 @@ def super_delete_user(uid):
 @auth.login_required
 def get_user(uid):
     user = User.query.filter_by(id=uid).first_or_404()
-    return jsonify(user)
+    r = {
+        'error_code': 0,
+        'msg': 'ok',
+        'data': user
+    }
+    return jsonify(r)
 
 
 @api.route('', methods=['DELETE'])

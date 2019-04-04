@@ -25,7 +25,7 @@ class AdminScope(Scope):
 
 
 class UserScope(Scope):
-    forbidden = ['v1.user+super_get_user']
+    forbidden = ['v1.user+get_user']
 
     def __init__(self):
         self + AdminScope()

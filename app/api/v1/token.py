@@ -28,7 +28,8 @@ def get_token():
         'error_code': 0,
         'msg': 'ok',
         'data': {
-            'token': token.decode('ascii')
+            'token': token.decode('ascii'),
+            'uid': identity['uid'],
         }
     }
     return jsonify(t), 201
