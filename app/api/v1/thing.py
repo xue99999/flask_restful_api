@@ -1,13 +1,13 @@
 from datetime import datetime
 
-from flask import g, jsonify
+from flask import g, jsonify, current_app
 
 from app.libs.error_code import Success, DeleteSuccess, ParameterException
 from app.libs.redprint import Redprint
 from app.libs.token_auth import auth
 from app.models.base import db
 from app.models.thing import Thing
-from app.validators.forms import ThingForm, ThingUpdateForm
+from app.validators.forms import ThingForm, ThingUpdateForm, ThingListForm
 
 api = Redprint('thing')
 
@@ -20,11 +20,16 @@ COMPLETE = '02'
 @auth.login_required
 def get_thing():
     uid = g.user.uid
-    things = Thing.query.filter_by(uid=uid).all()
+    form = ThingListForm().validate_for_api()
+    page = int(form.page.data) if form.page.data else 1
+    limit = int(form.limit.data) if form.limit.data else current_app.config['PER_PAGE']
+
+    things = Thing.query.filter_by(uid=uid).paginate(page=page, per_page=limit)
+    thing_list = [thing.hide('update_time') for thing in things.items]
     r = {
         'error_code': 0,
         'msg': 'ok',
-        'data': things
+        'data': thing_list
     }
     return jsonify(r)
 

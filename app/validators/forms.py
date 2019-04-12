@@ -59,3 +59,9 @@ class ThingForm(Form):
 class ThingUpdateForm(Form):
     content = StringField()
     complete_status = StringField(validators=[Length(min=2, max=2)])
+
+
+# todolist 列表数据
+class ThingListForm(Form):
+    page = StringField(validators=[Length(min=1, max=99)])
+    limit = StringField()

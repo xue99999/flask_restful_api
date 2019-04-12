@@ -24,7 +24,27 @@ api = Redprint('user')
 def super_get_user(uid):
     # 管理员访问
     user = User.query.filter_by(id=uid).first_or_404()
-    return jsonify(user)
+
+    r = {
+        'error_code': 0,
+        'msg': 'ok',
+        'data': user
+    }
+    return jsonify(r)
+
+
+@api.route('', methods=['GET'])
+@auth.login_required
+def get_user():
+    uid = g.user.uid
+    user = User.query.filter_by(id=uid).first_or_404()
+
+    r = {
+        'error_code': 0,
+        'msg': 'ok',
+        'data': user
+    }
+    return jsonify(r)
 
 
 @api.route('/<int:uid>', methods=['DELETE'])
@@ -35,18 +55,6 @@ def super_delete_user(uid):
         user = User.query.filter_by(id=uid).first_or_404()
         user.delete()
     return DeleteSuccess()
-
-
-@api.route('/<int:uid>', methods=['GET'])
-@auth.login_required
-def get_user(uid):
-    user = User.query.filter_by(id=uid).first_or_404()
-    r = {
-        'error_code': 0,
-        'msg': 'ok',
-        'data': user
-    }
-    return jsonify(r)
 
 
 @api.route('', methods=['DELETE'])
